@@ -13,9 +13,7 @@ int cs122a_main() {
   UART* up;
   uart_init();  // initialize UARTs
   test();
-  sum = 100;
-  up = &uart[0];  // test UART0
-  uprints(up, "Enter lines from serial terminal 0\n\r");
+  up = &uart[0];
   sum = 1000;
   while (1) {
     ugets(up, string);
