@@ -1,0 +1,1 @@
+/usr/bin/arm-none-eabi-gcc -T/workspaces/lecture-homework-week05-t/linker-script.ld --specs=nano.specs -Wl,--gc-sections CMakeFiles/uart.elf.dir/src/start.s.obj CMakeFiles/uart.elf.dir/src/main.c.obj CMakeFiles/uart.elf.dir/src/uart.c.obj -o uart.elf 

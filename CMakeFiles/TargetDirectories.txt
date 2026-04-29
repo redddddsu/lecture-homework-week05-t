@@ -1,0 +1,3 @@
+/workspaces/lecture-homework-week05-t/CMakeFiles/uart.elf.dir
+/workspaces/lecture-homework-week05-t/CMakeFiles/edit_cache.dir
+/workspaces/lecture-homework-week05-t/CMakeFiles/rebuild_cache.dir

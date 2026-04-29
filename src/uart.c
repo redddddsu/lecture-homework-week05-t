@@ -8,7 +8,7 @@
 
 UART uart[4];  // 4 UART structures
 
-uint8_t uart_rate_divisors[] = {0x04, 0x0C, 0x18, 0x20, 0x30};
+uint8_t uart_rate_divisors[] = {0x30, 0x20, 0x18, 0x0C};
 
 // UART initialization function
 int uart_init() {
@@ -18,8 +18,14 @@ int uart_init() {
     up = &uart[i];
     up->base = (char*)(0x101F1000 + i * 0x1000);
     up->n = i;
+    *((unsigned int *)(up->base + 0x2C)) = 0b01100000;
+    *((unsigned int *)(up->base + 0x24)) = uart_rate_divisors[i];
+
   }
   uart[3].base = (char*)(0x10009000);  // uart3 at 0x10009000
+  *((unsigned int *)(uart[3].base + 0x2C)) = 0b01100000;
+  *((unsigned int *)(uart[3].base + 0x24)) = uart_rate_divisors[3];
+  
 }
 
 // input a char from UART pointed by up
