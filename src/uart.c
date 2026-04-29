@@ -18,15 +18,31 @@ int uart_init() {
     up = &uart[i];
     up->base = (char*)(0x101F1000 + i * 0x1000);
     up->n = i;
-    *((unsigned int *)(up->base + 0x2C)) = 0b01100000;
     *((unsigned int *)(up->base + 0x24)) = uart_rate_divisors[i];
-
+    *((unsigned int *)(up->base + 0x2C)) = 0b01110000;
   }
   uart[3].base = (char*)(0x10009000);  // uart3 at 0x10009000
   *((unsigned int *)(uart[3].base + 0x2C)) = 0b01100000;
   *((unsigned int *)(uart[3].base + 0x24)) = uart_rate_divisors[3];
   
 }
+
+void test() {
+  for (int i = 0; i < 4; i++) {
+    UART* up = &uart[i];
+    char* base = up->base;
+
+    unsigned int ibrd = *(unsigned int *)(base + 0x24);
+    unsigned int lcrh = *(unsigned int *)(base + 0x2C);
+    unsigned int baud;
+
+    baud = 7380000 / (16 * ibrd);
+
+    uprintf(up, "UART[%d] Baudrate: %d\n", i, baud);
+    uprintf(up, "UART[%d] Line Control Register: 0x%x\n", i, lcrh);
+  }
+}
+
 
 // input a char from UART pointed by up
 int ugetc(UART* up) {

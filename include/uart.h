@@ -20,6 +20,7 @@ typedef volatile struct uart{
 extern UART uart[]; // 4 UART structures
 
 extern int uart_init();
+extern void test();
 extern int ugetc(UART *up);
 extern int uputc(UART *up, char c);
 extern int ugets(UART *up, char *s);
